@@ -1,0 +1,79 @@
+<ngx-datatable
+  #dataTable
+  class="material"
+  [loadingIndicator]="isLoading"
+  [rows]="rows"
+  [columnMode]="'force'"
+  [headerHeight]="70"
+  [footerHeight]="50"
+  [rowHeight]="50"
+  [scrollbarV]="true"
+  [scrollbarH]="true"
+  [sorts]="sorts"
+  [columns]="renderColumns"
+  [rowClass]="rowClass">
+
+  <!-- Row Detials -->
+  <ngx-datatable-row-detail [rowHeight]="rowDetailsHeight" #myDetailRow>
+    <ng-template let-row="row" ngx-datatable-row-detail-template>
+      <ng-template
+        [ngTemplateOutlet]="rowDetailsTemplate"
+        [ngTemplateOutletContext]="{row: row}"
+      >
+      </ng-template>
+    </ng-template>
+  </ngx-datatable-row-detail>
+
+  <!-- Footer Template-->
+  <ngx-datatable-footer>
+    <ng-template
+      ngx-datatable-footer-template
+      let-rowCount="rowCount"
+      let-pageSize="pageSize"
+      let-selectedCount="selectedCount"
+      let-curPage="curPage"
+      let-offset="offset">
+      <div class="footer-body">
+        <div>
+          {{rowCount}} total
+        </div>
+        <div>
+          <button mat-button (click)="exportCsv()">Export CSV</button>
+        </div>
+      </div>
+    </ng-template>
+  </ngx-datatable-footer>
+</ngx-datatable>
+
+<!-- Header Template -->
+<ng-template #hdrTpl let-column="column" let-dir="sortDir" let-sort="sortFn">
+  <span (click)="sort()" class="column-name">{{column.name}}</span> <br/>
+
+  <input
+    *ngIf="column.filter.visible && (column.filter.type === 'text' || column.filter.type === undefined)"
+    type="text"
+    class="filter-text-input"
+    (keyup)="onFilterUpdated(column.prop, filters[column.prop])"
+    (select)="onFilterInputSelect($event)"
+    [(ngModel)]="filters[column.prop]"
+    [disabled]="column.filter.disabled ? 'disabled' : 'false'"
+  >
+
+  <mat-select
+    *ngIf="column.filter.visible && column.filter.type == 'dropdown'"
+    [(ngModel)]="filters[column.prop]"
+    (selectionChange)="onFilterUpdated(column.prop, filters[column.prop])"
+    [disabled]="column.filter.disabled ? 'disabled' : 'false'"
+  >
+    <mat-option *ngFor="let option of column.filter.options" [value]="option.value">
+      {{ option.label }}
+    </mat-option>
+  </mat-select>
+</ng-template>
+
+<ng-template #dateCellTpl let-row="row" let-column="column">
+    <span>
+        {{this.lodash.get(row, column.prop) | moment}}
+    </span>
+</ng-template>
+

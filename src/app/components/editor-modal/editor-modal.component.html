@@ -1,0 +1,27 @@
+<form nz-form #form="ngForm" [formGroup]="formGroup" (ngSubmit)="onSubmit(form)" (change)="onChange(form)">
+  <nz-form-item class="column" *ngFor="let column of columns">
+    <nz-form-label>{{ column.name }}</nz-form-label>
+    <div *ngIf="column.editor.type === 'text'">
+      <nz-form-control>
+        <input [formControlName]="column.prop" nz-input>
+      </nz-form-control>
+    </div>
+    <div *ngIf="column.editor.type === 'datepicker'">
+      <nz-form-control>
+        <nz-date-picker [formControlName]="column.prop" nzPlaceholder="Select date" nzFormat="MM/dd/yyyy" nzShowTime></nz-date-picker>
+      </nz-form-control>
+    </div>
+    <div *ngIf="column.editor.type === 'dropdown'">
+      <nz-form-control>
+        <nz-select (ngModelChange)="onChange(form)" [formControlName]="column.prop" [nzMode]="column.editor.multiple ? 'multiple' : null">
+          <nz-option *ngFor="let option of column.editor.options" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </div>
+  </nz-form-item>
+  <ng-template [ngTemplateOutlet]="extraTpl" [ngTemplateOutletContext]="{row: row, form: form, formGroup: formGroup}"></ng-template>
+  <div class="customize-footer">
+    <button nz-button [nzType]="'default'" [nzSize]="'large'" type="button" (click)="handleCancel()">Cancel</button>
+    <button nz-button [nzType]="'primary'" [nzSize]="'large'" type="submit" [nzLoading]="loading" [disabled]="!form.valid">Update</button>
+  </div>
+</form>

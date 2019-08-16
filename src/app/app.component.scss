@@ -1,0 +1,38 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-toolbar {
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+}
+
+.logo {
+  height: 30px;
+  cursor: pointer;
+}
+
+.router-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+}
+
+:host ::ng-deep .mat-button-wrapper {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+:host ::ng-deep router-outlet + * {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}

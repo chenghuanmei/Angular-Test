@@ -1,0 +1,89 @@
+:host {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+ngx-datatable {
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+}
+
+:host ::ng-deep {
+  font-size: 14px;
+
+  input[type="text"]:disabled {
+    color: gray;
+    cursor: not-allowed;
+  }
+
+  .datatable-body-cell-label {
+    user-select: text;
+    font-size: 14px;
+  }
+
+  .datatable-pager {
+    display: none;
+  }
+
+  $filter_input_height: 25px;
+
+  .filter-text-input {
+    font-size: 14px;
+    height: $filter_input_height;
+    width: 80%;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    outline: none;
+    padding: 3px 5px;
+  }
+
+  .filter-text-input:focus {
+    border-bottom: 1px solid #5264ae;
+  }
+
+  .filter_selector {
+    width: 100%;
+    font-size: 14px;
+    padding-top: 0;
+
+    .mat-select-trigger {
+      height: $filter_input_height;
+      width: 100%;
+      min-width: 50px;
+    }
+
+    .mat-select-value-text {
+      font-size: 14px;
+      line-height: inherit;
+      padding: 3px 5px;
+    }
+  }
+
+  a {
+    color: #14be94;
+    text-decoration: none;
+    font-weight: normal;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.footer-body {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.column-name {
+  cursor: pointer;
+  text-transform: uppercase;
+}
