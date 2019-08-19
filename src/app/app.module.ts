@@ -1,6 +1,8 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 
+import { AngularReactBrowserModule } from "@angular-react/core";
+
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -57,11 +59,13 @@ import { ReactComponentsModule } from "./react-components/react-components.modul
     // DatatableComponent,
   ],
   imports: [
+    AngularReactBrowserModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
 
     ReactComponentsModule,
+
 
     // Material Modules
     MatButtonModule,
